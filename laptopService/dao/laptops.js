@@ -1,23 +1,23 @@
 
 const path= require('path');
 const rootPath= path.resolve(__dirname, '../../');
- //const filepath=path.join(rootPath, 'resources/Laptop.json');
+const filepath=path.join(rootPath, 'resources/Laptop.json');
 const fs = require('fs');
 const { log } = require('console');
 const getAllDataFromDynamoDB = require('./daoImpl');
 
-// let read_json_file = () =>{
-//     return fs.readFileSync(filepath);
-// }
+let read_json_file = () =>{
+    return fs.readFileSync(filepath);
+}
 
-// exports.list = () =>{
-//     return JSON.parse(read_json_file());
-// }
+exports.list = () =>{
+    return JSON.parse(read_json_file());
+}
 
 
 
 exports.query_by_arg = async (value) =>{
-    if (value !== "IN" && value !== "IRE" && value !== "US-NC") {
+    if (value !== "IN" && value !== "IE" && value !== "US-NC") {
         return null;
     }
     try {
@@ -30,7 +30,7 @@ exports.query_by_arg = async (value) =>{
             if (value === "IN") {
                 resultItem.price *= 83;
                 resultItem.price *= 1.18;
-            } else if (value === "IRE") {
+            } else if (value === "IE") {
                 resultItem.price *= 0.94;
                 resultItem.price *= 1.23;
             }
@@ -45,7 +45,29 @@ exports.query_by_arg = async (value) =>{
         return results;
     } catch (error) {
         console.error('Error querying data from DynamoDB:', error);
-        return null;
+        data = this.list();
+        const results = data.map((item) => {
+
+            const resultItem = { ...item };
+            console.log("In value", value);
+
+            if (value === "IN") {
+                
+                resultItem.price *= 83;
+                console.log("inside ", resultItem.price);
+                resultItem.price *= 1.18;
+            } else if (value === "IE") {
+                resultItem.price *= 0.94;
+                resultItem.price *= 1.23;
+            }
+            else if(value==="US-NC"){
+                resultItem.price *= 1.08;
+            }
+            resultItem.price = parseFloat(resultItem.price.toFixed(2));
+            return resultItem;
+        });
+        console.log("Resultbmwdbncd" , results);
+        return results;
     }
 
 }
@@ -59,7 +81,7 @@ exports.query_by_arg = async (value) =>{
 //         }else if(value === "USA-NC"){
 //             results[i].price *= 1.08;
 //         }
-//         else if(value === "IRE"){
+//         else if(value === "IE"){
 //         results[i].price *= 2.08;
 //         }
 
