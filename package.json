@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "start": "concurrently \"node ./bikeService/bin/www\" \"node ./foodService/bin/www\" \"node ./toyService/bin/www\"",
+    "devStart": "concurrently \"nodemon ./bikeService/bin/www\" \"nodemon ./foodService/bin/www\" \"nodemon ./toyService/bin/www\"",
+    "test":"concurrently \"npm test --prefix ./bikeService\" \"npm test --prefix ./foodService\" \"npm test --prefix ./toyService\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
