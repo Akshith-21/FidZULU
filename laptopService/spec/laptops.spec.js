@@ -5,12 +5,12 @@ var http = require('http');
 // Mock your route dependencies
 
 const base_url = 'http://localhost:3001/';
-const toys_url = base_url + 'toys/Raleigh';
-const not_found_url = base_url + 'toys/';
+const laptops_url = base_url + 'laptops/IN';
+const not_found_url = base_url + 'laptops/';
 
 app.set('port', 3001);
 
-describe("Toys server  endpoint tests", function () {
+describe("Laptops server  endpoint tests", function () {
     let server;
 
     beforeAll(() => {
@@ -23,23 +23,23 @@ describe("Toys server  endpoint tests", function () {
       server.close(done); // Shutdown the server after tests are complete
     });
     
-    describe("GET /toys/Raleigh", () => {
+    describe("GET /laptops/IN", () => {
         it("returns status code 200",  (done) => {
-            request.get(toys_url, (error, response, body) => {
+            request.get(laptops_url, (error, response, body) => {
                 expect(response.statusCode).toBe(200);
                 done();
             });
         });
         it("contains price", (done) => {
-            request.get(toys_url, (error, response, body) => {
+            request.get(laptops_url, (error, response, body) => {
                 expect(body).toBeTruthy();
-                expect(body).toContain("prize");
+                expect(body).toContain("price");
                 done();
             });
         });
     });
     // test for wrong path and expect 404
-    describe("GET /toys/", () => {
+    describe("GET /laptops/", () => {
         it("returns status code 404",  (done) => {
             request.get(not_found_url, (error, response, body) => {
                 expect(response.statusCode).toBe(404);
@@ -47,7 +47,7 @@ describe("Toys server  endpoint tests", function () {
             });
         });
     });
-    describe("GET /toys/China", () => {
+    describe("GET /laptops/China", () => {
         it("returns status code 404",  (done) => {
             request.get(not_found_url + "China", (error, response, body) => {
                 expect(response.statusCode).toBe(404);

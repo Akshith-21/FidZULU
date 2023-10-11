@@ -1,8 +1,10 @@
 
 const path= require('path');
 const rootPath= path.resolve(__dirname, '../../');
-const filepath=path.join(rootPath, 'resources/Laptop.json');
+// const filepath=path.join(rootPath, 'resources/Laptop.json');
 const fs = require('fs');
+const { log } = require('console');
+const getAllDataFromDynamoDB = require('./daoImpl');
 
 let read_json_file = () =>{
     return fs.readFileSync(filepath);
@@ -14,25 +16,60 @@ exports.list = () =>{
 
 
 
-exports.query_by_arg = (value) =>{
-    if(value !== "Raleigh" && value!=="Durham"){
+exports.query_by_arg = async (value) =>{
+    if (value !== "IN" && value !== "IRE" && value !== "US-NC") {
         return null;
     }
-    let results = JSON.parse(read_json_file());
-    console.log("Query by location" + value);
-    console.log(results);
-    for(let i =0; i < results.length; i++){
-        console.log(results[i].price);
-        if(value === "Raleigh"){
-            results[i].prize *= 1.075;
-        }else if(value === "Durham"){
-            results[i].prize *= 1.08;
-        }
-
-        results[i].prize = results[i].prize.toFixed(2); 
+    try {
+        // Use the asynchronous DAO function to get data from DynamoDB
+        const data = await getAllDataFromDynamoDB();
+        // console.log(data)
+        // Process the data based on the location value
+        const results = data.map((item) => {
+            const resultItem = { ...item };
+            if (value === "IN") {
+                resultItem.price *= 83;
+                resultItem.price *= 1.18;
+            } else if (value === "IRE") {
+                resultItem.price *= 0.94;
+                resultItem.price *= 1.23;
+            }
+            else {
+                resultItem.price *= 1.08;
+            }
+            resultItem.price = parseFloat(resultItem.price.toFixed(2));
+            //   console.log("Results   ========>",resultItem);
+            return resultItem;
+        });
+        console.log("Results   ========>", results);
+        return results;
+    } catch (error) {
+        console.error('Error querying data from DynamoDB:', error);
+        return null;
     }
-    return results;
-}
+    }
+    
+
+
+//     let results = JSON.parse(read_json_file());
+//     console.log("Query by location" + value);
+//     console.log(results);
+//     for(let i =0; i < results.length; i++){
+//         console.log(results[i].price);
+//         if(value === "IN"){
+//             results[i].price *= 1.075;
+//         }else if(value === "USA-NC"){
+//             results[i].price *= 1.08;
+//         }
+//         else if(value === "IRE"){
+//         results[i].price *= 2.08;
+//         }
+
+//     results[i].price=Math.round((results[i].price + Number.EPSILON) * 100) / 100
+//      console.log(results);
+//     }
+//     return results;
+// }
 
 exports.post_laptop = (laptops) => {
     if (laptops.hasOwnProperty("productId") && laptops.hasOwnProperty("productName") && laptops.hasOwnProperty("productDescription") &&

@@ -17,13 +17,14 @@ router.get('/team', function(req, res, next) {
   }
 });
 
-router.get('/:location', function(req, res, next) {
+router.get('/:location',async function(req, res, next) {
   const param = req.params.location;
   console.log('got into laptops/:location ' + param);
 
-  const result = laptops.query_by_arg(
+  const result = await laptops.query_by_arg(
     param);
   if (result) {
+    console.log()
     res.setHeader('content-type', 'application/json');
     res.json((result));
   } else {

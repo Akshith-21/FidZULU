@@ -1,4 +1,17 @@
-[
+const AWS = require('aws-sdk');
+const async = require('async');
+require('dotenv').config();
+// Configure your AWS credentials
+AWS.config.update({
+    region: process.env.AWS_REGION,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  });
+
+const docClient = new AWS.DynamoDB.DocumentClient();
+
+
+const jsonData =[
     {
         "productId": 1001,
         "productName": "Acer Aspire 5",
@@ -112,3 +125,37 @@
         "url": "https://m.media-amazon.com/images/I/81rOuSWZtvL._SL1500_.jpg"
     }
   ]
+
+// DynamoDB table name
+const tableName = 'fz_laptop';
+
+// Function to upload data to DynamoDB
+function uploadToDynamoDB(item, callback) {
+  const params = {
+    TableName: tableName,
+    Item: item,
+  };
+
+  docClient.put(params, (err, data) => {
+    if (err) {
+      console.error('Error:', err);
+    } else {
+      console.log('Uploaded:', item.productId);
+    }
+
+    callback(err, data);
+  });
+}
+
+// Use the async library to upload the data in parallel
+async.each(
+  jsonData,
+  uploadToDynamoDB,
+  (err) => {
+    if (err) {
+      console.error('One or more items failed to upload.');
+    } else {
+      console.log('All items uploaded successfully.');
+    }
+  }
+);
