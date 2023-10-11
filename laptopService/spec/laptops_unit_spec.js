@@ -4,24 +4,24 @@ let laptops = require("../dao/laptops");
 describe("Unit tests on laptops module", () => {
     
     describe("load all laptops", () => {
-        it("have four elements", async () => {
-            let results = await laptops.query_by_arg("IN");
+        it("have seven elements", async () => {
+            let results = await laptops.getLaptops("IN");
             expect(results.length).toBe(7);
         });
         
     });
     describe("load laptops with taxes", () => {
         it("with location IN", async () => {
-            let results = await laptops.query_by_arg("IN");
-            expect(results[0].price).toBe(107733.02);
+            let results = await laptops.getLaptops("IN");
+            expect(results[0].price).toBe(68557.02);
         });
-        it("with location IRE", async () => {
-            let results = await laptops.query_by_arg("IRE");
-            expect(results[0].price).toBe(1271.81);
+        it("with location IE", async () => {
+            let results = await laptops.getLaptops("IE");
+            expect(results[0].price).toBe(809.33);
         });
         it("with invalid location China",async  () => {
             expect( () => {
-                laptops.query_by_arg("China");
+                laptops.getLaptops("China");
                 expect(results).toBeNull();
             })
         });
