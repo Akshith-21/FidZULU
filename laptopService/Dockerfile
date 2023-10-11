@@ -6,6 +6,7 @@ WORKDIR /usr/src/app
 
 # Copy the current directory contents into the container
 COPY package*.json ./
+COPY resources ./
 
 # Install any needed packages specified in package.json
 RUN npm install
