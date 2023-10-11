@@ -1,18 +1,18 @@
 
 const path= require('path');
 const rootPath= path.resolve(__dirname, '../../');
-// const filepath=path.join(rootPath, 'resources/Laptop.json');
+ //const filepath=path.join(rootPath, 'resources/Laptop.json');
 const fs = require('fs');
 const { log } = require('console');
 const getAllDataFromDynamoDB = require('./daoImpl');
 
-let read_json_file = () =>{
-    return fs.readFileSync(filepath);
-}
+// let read_json_file = () =>{
+//     return fs.readFileSync(filepath);
+// }
 
-exports.list = () =>{
-    return JSON.parse(read_json_file());
-}
+// exports.list = () =>{
+//     return JSON.parse(read_json_file());
+// }
 
 
 
@@ -47,10 +47,8 @@ exports.query_by_arg = async (value) =>{
         console.error('Error querying data from DynamoDB:', error);
         return null;
     }
-    }
-    
 
-
+}
 //     let results = JSON.parse(read_json_file());
 //     console.log("Query by location" + value);
 //     console.log(results);
