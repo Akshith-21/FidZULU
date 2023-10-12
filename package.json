@@ -1,0 +1,23 @@
+{
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "author": "",
+    "license": "ISC",
+    "scripts": {
+      "clnI": "npm install && for dir in laptopService; do (cd $dir && npm install); done",
+      "start": "concurrently \"node ./laptopService/bin/www\"",
+      "devStart": "concurrently \"nodemon ./laptopService/bin/www\"",
+      "test":"concurrently \"npm test --prefix ./laptopService\""
+    },
+    "dependencies": {
+      "concurrently": "^8.2.1",
+      "cookie-parser": "^1.4.6",
+      "jasmine": "^5.1.0"
+      
+    },
+    "devDependencies": {
+      "nodemon": "^3.0.1"
+    }
+  }
