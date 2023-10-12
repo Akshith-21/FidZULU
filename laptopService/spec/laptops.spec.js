@@ -8,14 +8,14 @@ const base_url = 'http://localhost:3001/';
 const laptops_url = base_url + 'laptops/all/IN';
 const not_found_url = base_url + 'laptops/';
 
-app.set('port', 3001);
+app.set('port', 3002);
 
-describe("Laptops server  endpoint tests", function () {
+describe("Toys server  endpoint tests", function () {
     let server;
 
     beforeAll(() => {
         server = http.createServer(app);
-        server.listen(3001);
+        server.listen(3002);
     });
   
     afterAll((done) => {
@@ -25,13 +25,13 @@ describe("Laptops server  endpoint tests", function () {
     
     describe("GET /laptops/all/IN", () => {
         it("returns status code 200",  (done) => {
-            request.get(laptops_url, (error, response, body) => {
+            request.get(toys_url, (error, response, body) => {
                 expect(response.statusCode).toBe(200);
                 done();
             });
         });
         it("contains price", (done) => {
-            request.get(laptops_url, (error, response, body) => {
+            request.get(toys_url, (error, response, body) => {
                 expect(body).toBeTruthy();
                 expect(body).toContain("price");
                 done();
@@ -39,7 +39,7 @@ describe("Laptops server  endpoint tests", function () {
         });
     });
     // test for wrong path and expect 404
-    describe("GET /laptops/", () => {
+    describe("GET /toys/", () => {
         it("returns status code 404",  (done) => {
             request.get(not_found_url, (error, response, body) => {
                 expect(response.statusCode).toBe(404);
@@ -47,7 +47,7 @@ describe("Laptops server  endpoint tests", function () {
             });
         });
     });
-    describe("GET /laptops/China", () => {
+    describe("GET /toys/China", () => {
         it("returns status code 404",  (done) => {
             request.get(not_found_url + "China", (error, response, body) => {
                 expect(response.statusCode).toBe(404);

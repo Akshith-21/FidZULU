@@ -19,7 +19,7 @@ describe("Unit tests on laptops module", () => {
             let results = await laptops.getLaptops("IE");
             expect(results[0].price.toString()).toMatch(/^\d+\.\d{2}$/);
         });
-        it("with invalid location China",async  () => {
+        it("with invalid location China", () => {
             expect( () => {
                 laptops.getLaptops("China");
                 expect(results).toBeNull();
