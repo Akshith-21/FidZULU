@@ -4,18 +4,18 @@ var http = require('http');
 
 // Mock your route dependencies
 
-const base_url = 'http://localhost:3002/';
-const toys_url = base_url + 'laptops/all/IN';
+const base_url = 'http://localhost:3001/';
+const laptops_url = base_url + 'laptops/all/IN';
 const not_found_url = base_url + 'laptops/';
 
-app.set('port', 3002);
+app.set('port', 3001);
 
-describe("Toys server  endpoint tests", function () {
+describe("Laptops server  endpoint tests", function () {
     let server;
 
     beforeAll(() => {
         server = http.createServer(app);
-        server.listen(3002);
+        server.listen(3001);
     });
   
     afterAll((done) => {
@@ -23,15 +23,15 @@ describe("Toys server  endpoint tests", function () {
       server.close(done); // Shutdown the server after tests are complete
     });
     
-    describe("GET /toys/all/IN", () => {
+    describe("GET /laptops/all/IN", () => {
         it("returns status code 200",  (done) => {
-            request.get(toys_url, (error, response, body) => {
+            request.get(laptops_url, (error, response, body) => {
                 expect(response.statusCode).toBe(200);
                 done();
             });
         });
         it("contains price", (done) => {
-            request.get(toys_url, (error, response, body) => {
+            request.get(laptops_url, (error, response, body) => {
                 expect(body).toBeTruthy();
                 expect(body).toContain("price");
                 done();
@@ -39,7 +39,7 @@ describe("Toys server  endpoint tests", function () {
         });
     });
     // test for wrong path and expect 404
-    describe("GET /toys/", () => {
+    describe("GET /laptops/", () => {
         it("returns status code 404",  (done) => {
             request.get(not_found_url, (error, response, body) => {
                 expect(response.statusCode).toBe(404);
@@ -47,7 +47,7 @@ describe("Toys server  endpoint tests", function () {
             });
         });
     });
-    describe("GET /toys/China", () => {
+    describe("GET /laptops/China", () => {
         it("returns status code 404",  (done) => {
             request.get(not_found_url + "China", (error, response, body) => {
                 expect(response.statusCode).toBe(404);
