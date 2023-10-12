@@ -26,7 +26,7 @@ const jsonData =[
         "lcd": "15.6\" Full HD IPS",
         "colorChoice": "Silver",
         "keyboard": "Backlit",
-        "url": "https://i5.walmartimages.com/asr/594929a8-8cb9-41b6-aec2-a52e73f6867a.182e8423b76c8be28ec20a52ff73aff5.jpeg"
+        "imageUrl": "https://i5.walmartimages.com/asr/594929a8-8cb9-41b6-aec2-a52e73f6867a.182e8423b76c8be28ec20a52ff73aff5.jpeg"
     },
     {
         "productId": 1002,
@@ -42,7 +42,7 @@ const jsonData =[
         "lcd": "13.3\" Full HD Touchscreen",
         "colorChoice": "Dark Ash Silver",
         "keyboard": "Backlit",
-        "url": "https://m.media-amazon.com/images/I/818enc9q8xL._SL1500_.jpg"
+        "imageUrl": "https://m.media-amazon.com/images/I/818enc9q8xL._SL1500_.jpg"
     },
     {
         "productId": 1003,
@@ -58,7 +58,7 @@ const jsonData =[
         "lcd": "13.4\" 4K UHD InfinityEdge Touch",
         "colorChoice": "Platinum Silver",
         "keyboard": "Backlit",
-        "url": "https://m.media-amazon.com/images/I/61OBvwVHtQL._SL1280_.jpg"
+        "imageUrl": "https://m.media-amazon.com/images/I/61OBvwVHtQL._SL1280_.jpg"
     },
     {
         "productId": 1004,
@@ -74,7 +74,7 @@ const jsonData =[
         "lcd": "14\" FHD IPS",
         "colorChoice": "Black",
         "keyboard": "Backlit",
-        "url": "https://m.media-amazon.com/images/I/6168gZaEphL._SL1080_.jpg"
+        "imageUrl": "https://m.media-amazon.com/images/I/6168gZaEphL._SL1080_.jpg"
     },
     {
         "productId": 1005,
@@ -90,7 +90,7 @@ const jsonData =[
         "lcd": "13.3\" Retina Display",
         "colorChoice": "Space Gray",
         "keyboard": "Magic Keyboard",
-        "url": "https://m.media-amazon.com/images/I/71jG+e7roXL._SL1500_.jpg"
+        "imageUrl": "https://m.media-amazon.com/images/I/71jG+e7roXL._SL1500_.jpg"
     },
     {
         "productId": 1006,
@@ -106,7 +106,7 @@ const jsonData =[
         "lcd": "14\" QHD 120Hz",
         "colorChoice": "Moonlight White",
         "keyboard": "Backlit",
-        "url": "https://m.media-amazon.com/images/I/71mbFexXBZL._SL1500_.jpg"
+        "imageUrl": "https://m.media-amazon.com/images/I/71mbFexXBZL._SL1500_.jpg"
     },
     {
         "productId": 1007,
@@ -122,7 +122,7 @@ const jsonData =[
         "lcd": "15\" PixelSense Touchscreen",
         "colorChoice": "Ice Blue",
         "keyboard": "Alcantara-covered",
-        "url": "https://m.media-amazon.com/images/I/81rOuSWZtvL._SL1500_.jpg"
+        "imageUrl": "https://m.media-amazon.com/images/I/81rOuSWZtvL._SL1500_.jpg"
     }
   ]
 
